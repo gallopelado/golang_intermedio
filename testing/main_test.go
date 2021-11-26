@@ -66,3 +66,33 @@ func TestMax(t *testing.T) {
 		}
 	}
 }
+
+/*
+	Para BigO notation
+	Ver el rendimiento
+	go test -cpuprofile=cpu.out
+
+	Revisamos el fichero generado
+	go tool pprof cpu.out
+	Comandos:
+	top
+	list Fibonacci
+	web(Instalar sudo apt install graphviz)
+*/
+
+func TestFib(t *testing.T) {
+	tables := []struct {
+		a int
+		n int
+	}{
+		{1, 1},
+		{8, 21},
+		{50, 12586269025},
+	}
+	for _, item := range tables {
+		fib := Fibonacci(item.a)
+		if fib != item.n {
+			t.Errorf("Fibonacci was incorrect, got %d expected %d", fib, item.n)
+		}
+	}
+}
