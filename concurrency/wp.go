@@ -3,15 +3,17 @@ package main
 import "fmt"
 
 func main() {
-	tasks := []int{2, 3, 4, 5, 7, 10, 12, 40, 50}
+	tasks := []int{2, 3, 4, 5, 7, 10, 12, 40}
 	nWorkers := 3
 	// donde se van a leer los resultados
 	jobs := make(chan int, len(tasks))
 	// donde se van a transmitir los resultados
 	results := make(chan int, len(tasks))
+	// asignamos los workers
 	for i := 0; i < nWorkers; i++ {
 		go Worker(i, jobs, results)
 	}
+	// es aqui cuando ponemos a trabajar a los workers
 	for _, value := range tasks {
 		jobs <- value
 	}
